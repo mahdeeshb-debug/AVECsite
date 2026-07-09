@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Avec Human Supporters — Des mains solidaires, un monde meilleur</title>
+<link href="pics/Avec-HSA.webp" rel="icon" type="image/webp"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,700&amp;family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --paper:#F3E8D8;
+    --paper-deep:#E9D6BB;
+    --ink:#242A1F;
+    --ink-soft:#4A4F3F;
+    --clay:#B5502F;
+    --clay-dark:#8F3D22;
+    --olive:#4B5A34;
+    --olive-dark:#39442A;
+    --gold:#D9A441;
+    --rose-dust:#D9B8A3;
+    --card:#FBF4E7;
+    --thread: var(--clay);
+    --radius: 6px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Archivo', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces', serif;
+    color:var(--ink);
+    margin:0 0 .4em 0;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  a{color:var(--clay); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  img{max-width:100%; display:block;}
+  button{font-family:inherit; cursor:pointer;}
+  :focus-visible{outline:3px solid var(--gold); outline-offset:2px;}
+
+  .wrap{max-width:1120px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- Header ---------- */
+  header.site{
+    position:sticky; top:0; z-index:100;
+    background:rgba(243,232,216,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(36,42,31,0.12);
+  }
+  .header-inner{display:flex; align-items:center; justify-content:space-between; padding:14px 28px; max-width:1120px; margin:0 auto;}
+  .logo{display:flex; align-items:center; gap:10px; font-family:'Fraunces',serif; font-weight:700; font-size:1.25rem; color:var(--ink);}
+  .logo svg{flex-shrink:0;}
+  .logo .sub{display:block; font-family:'Archivo',sans-serif; font-weight:500; font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); margin-top:1px;}
+  nav.main{display:flex; align-items:center; gap:26px;}
+  nav.main a{
+    color:var(--ink-soft); font-weight:600; font-size:.92rem; letter-spacing:.01em;
+    padding:6px 2px; border-bottom:2px solid transparent; text-decoration:none;
+  }
+  nav.main a:hover, nav.main a.active{color:var(--clay); border-bottom-color:var(--clay);}
+  .header-actions{display:flex; align-items:center; gap:14px;}
+  .lang-toggle{
+    display:flex; border:1.5px solid var(--ink); border-radius:20px; overflow:hidden; font-size:.75rem; font-weight:700;
+  }
+  .lang-toggle button{
+    background:transparent; border:none; padding:5px 12px; color:var(--ink-soft); letter-spacing:.05em;
+  }
+  .lang-toggle button.active{background:var(--ink); color:var(--paper);}
+  .btn-donate-top{
+    background:var(--clay); color:#fff; padding:9px 18px; border-radius:20px; font-weight:700; font-size:.85rem;
+    box-shadow:0 2px 0 var(--clay-dark);
+  }
+  .btn-donate-top:hover{text-decoration:none; transform:translateY(1px); box-shadow:0 1px 0 var(--clay-dark);}
+  .burger{display:none; background:none; border:none; padding:6px;}
+  .burger span{display:block; width:22px; height:2px; background:var(--ink); margin:5px 0;}
+
+  @media (max-width:860px){
+    nav.main{
+      position:fixed; inset:64px 0 0 0; background:var(--paper); flex-direction:column; align-items:flex-start;
+      padding:24px 28px; gap:18px; transform:translateX(100%); transition:transform .25s ease; overflow-y:auto;
+    }
+    nav.main.open{transform:translateX(0);}
+    nav.main a{font-size:1.1rem;}
+    .burger{display:block;}
+    .header-actions .btn-donate-top{padding:8px 14px; font-size:.78rem;}
+  }
+
+  /* ---------- Sections generic ---------- */
+  .page{display:none;}
+  .page.active{display:block;}
+  section{padding:74px 0;}
+  section.deep{background:var(--paper-deep);}
+  .eyebrow{
+    font-family:'Archivo',sans-serif; text-transform:uppercase; letter-spacing:.16em; font-size:.72rem;
+    font-weight:800; color:var(--clay); margin-bottom:14px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:26px; height:2px; background:var(--clay); display:inline-block;}
+  .stitch{
+    height:14px; margin:0 0 34px 0; width:100%; overflow:hidden;
+  }
+  .stitch svg{width:100%; height:14px; display:block;}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:64px 0 40px 0; position:relative;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:48px; align-items:center;}
+  .hero h1{font-size:clamp(2.3rem, 4.4vw, 3.6rem); line-height:1.06; font-weight:700;}
+  .hero h1 em{font-style:italic; color:var(--clay); font-weight:600;}
+  .hero p.lead{font-size:1.12rem; color:var(--ink-soft); max-width:46ch; margin:20px 0 30px 0;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-block; padding:13px 26px; border-radius:30px; font-weight:700; font-size:.95rem; border:2px solid var(--ink);
+  }
+  .btn-primary{background:var(--clay); border-color:var(--clay); color:#fff; box-shadow:0 3px 0 var(--clay-dark);}
+  .btn-primary:hover{text-decoration:none; transform:translateY(2px); box-shadow:0 1px 0 var(--clay-dark);}
+  .btn-outline{background:transparent; color:var(--ink); box-shadow:0 3px 0 var(--ink);}
+  .btn-outline:hover{text-decoration:none; transform:translateY(2px); box-shadow:0 1px 0 var(--ink);}
+
+  .photo-stack{position:relative; height:380px;}
+  .photo-stack img{
+    position:absolute; width:62%; border:8px solid var(--card); box-shadow:0 12px 26px rgba(36,42,31,0.25);
+    object-fit:cover; height:230px; border-radius:2px;
+  }
+  .photo-stack img.p1{top:0; left:4%; transform:rotate(-6deg); z-index:2;}
+  .photo-stack img.p2{top:60px; right:0; transform:rotate(5deg); z-index:3; width:56%;}
+  .photo-stack img.p3{bottom:0; left:20%; transform:rotate(-2deg); z-index:1; width:50%; height:190px;}
+  @media(max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .photo-stack{height:300px; margin-top:20px;}
+  }
+
+  .meta-note{
+    margin-top:44px; display:flex; align-items:center; gap:12px; background:var(--card);
+    border:1px dashed var(--rose-dust); border-radius:30px; padding:11px 20px; font-size:.88rem; max-width:fit-content;
+  }
+  .meta-note span.dot{width:8px; height:8px; border-radius:50%; background:var(--olive); flex-shrink:0;}
+
+  /* ---------- Pillars ---------- */
+  .pillars{display:grid; grid-template-columns:repeat(3,1fr); gap:26px; margin-top:20px;}
+  .pillar-card{
+    background:var(--card); border-radius:var(--radius); overflow:hidden; box-shadow:0 4px 14px rgba(36,42,31,0.1);
+    display:flex; flex-direction:column; transition:transform .2s ease;
+  }
+  .pillar-card:hover{transform:translateY(-4px);}
+  .pillar-card img{height:170px; object-fit:cover; width:100%;}
+  .pillar-body{padding:22px 22px 26px 22px;}
+  .pillar-body h3{font-size:1.15rem; margin-bottom:10px;}
+  .pillar-body p{font-size:.92rem; color:var(--ink-soft); margin:0 0 14px 0;}
+  .pillar-body a.more{font-weight:700; font-size:.85rem;}
+  @media(max-width:860px){.pillars{grid-template-columns:1fr;}}
+
+  /* ---------- Stat strip ---------- */
+  .stat-strip{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0; background:var(--ink); color:var(--paper);
+    border-radius:var(--radius); overflow:hidden; margin-top:64px;
+  }
+  .stat{padding:30px 20px; text-align:center; border-right:1px solid rgba(243,232,216,0.15);}
+  .stat:last-child{border-right:none;}
+  .stat .num{font-family:'Fraunces',serif; font-size:2.2rem; font-weight:700; color:var(--gold);}
+  .stat .label{font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; color:var(--paper); opacity:.85; margin-top:4px;}
+  @media(max-width:700px){.stat-strip{grid-template-columns:repeat(2,1fr);}}
+
+  /* ---------- Page header (inner pages) ---------- */
+  .page-hero{padding:56px 0 30px 0;}
+  .page-hero h1{font-size:clamp(2rem,3.6vw,2.9rem);}
+  .page-hero p{color:var(--ink-soft); max-width:60ch; font-size:1.05rem;}
+  .breadcrumb{font-size:.8rem; color:var(--ink-soft); margin-bottom:16px;}
+  .breadcrumb a{color:var(--ink-soft); font-weight:600;}
+  .breadcrumb .sep{margin:0 6px; opacity:.5;}
+
+  /* ---------- About: mission ---------- */
+  .mission-block{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;}
+  .mission-block p{color:var(--ink-soft); margin-bottom:16px;}
+  @media(max-width:860px){.mission-block{grid-template-columns:1fr;}}
+
+  /* ---------- Timeline (signature thread element) ---------- */
+  .timeline{position:relative; margin-top:50px; padding-left:6px;}
+  .timeline-thread{
+    position:absolute; left:19px; top:6px; bottom:6px; width:2px;
+  }
+  .timeline-item{position:relative; padding:0 0 42px 56px;}
+  .timeline-item:last-child{padding-bottom:0;}
+  .timeline-dot{
+    position:absolute; left:10px; top:2px; width:20px; height:20px; border-radius:50%;
+    background:var(--card); border:3px solid var(--clay); z-index:2;
+  }
+  .timeline-item .year{font-family:'Fraunces',serif; font-weight:700; color:var(--clay); font-size:1.05rem; display:block; margin-bottom:4px;}
+  .timeline-item h4{font-size:1.08rem; margin-bottom:6px;}
+  .timeline-item p{color:var(--ink-soft); font-size:.94rem; max-width:60ch; margin:0;}
+
+  /* ---------- Digital responsibility ---------- */
+  .responsibility{
+    background:var(--olive); color:var(--paper); border-radius:10px; padding:44px 40px; margin-top:20px;
+  }
+  .responsibility h2{color:var(--paper);}
+  .responsibility .eyebrow{color:var(--gold);}
+  .responsibility .eyebrow::before{background:var(--gold);}
+  .resp-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:26px;}
+  .resp-grid h4{color:var(--gold); font-size:1rem; margin-bottom:8px;}
+  .resp-grid p{font-size:.9rem; color:rgba(243,232,216,0.88); margin:0;}
+  @media(max-width:860px){.resp-grid{grid-template-columns:1fr;}}
+
+  /* ---------- Partners ---------- */
+  .partners-group{margin-top:36px;}
+  .partners-group h3{font-size:1rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft); margin-bottom:16px; font-family:'Archivo',sans-serif; font-weight:800;}
+  .partner-list{display:flex; flex-wrap:wrap; gap:12px; margin-bottom:36px;}
+  .partner-chip{
+    background:var(--card); border:1px solid var(--rose-dust); border-radius:24px; padding:9px 18px; font-size:.88rem; font-weight:600;
+  }
+  .partner-chip .flag{opacity:.7; font-weight:500; margin-left:4px;}
+
+  /* ---------- Projects domains ---------- */
+  .domain{padding:60px 0;}
+  .domain-photos{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:30px; border-radius:8px; overflow:hidden;}
+  .domain-photos img{height:220px; object-fit:cover; width:100%;}
+  @media(max-width:700px){.domain-photos{grid-template-columns:1fr 1fr;}}
+  .domain-intro{max-width:74ch; color:var(--ink-soft); margin-bottom:26px;}
+  .domain-list{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media(max-width:760px){.domain-list{grid-template-columns:1fr;}}
+  .domain-item{background:var(--card); border-left:4px solid var(--clay); padding:18px 20px; border-radius:0 8px 8px 0;}
+  .domain-item h4{font-size:1rem; margin-bottom:6px;}
+  .domain-item p{font-size:.9rem; color:var(--ink-soft); margin:0;}
+
+  /* ---------- Contact ---------- */
+  .contact-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:50px; margin-top:10px;}
+  @media(max-width:860px){.contact-grid{grid-template-columns:1fr;}}
+  .field{margin-bottom:18px;}
+  .field label{display:block; font-weight:700; font-size:.85rem; margin-bottom:6px;}
+  .field input, .field textarea{
+    width:100%; padding:12px 14px; border:1.5px solid var(--rose-dust); border-radius:6px; background:var(--card);
+    font-family:inherit; font-size:.95rem; color:var(--ink); resize:vertical;
+  }
+  .field input:focus, .field textarea:focus{border-color:var(--clay); outline:none;}
+  .contact-card{background:var(--ink); color:var(--paper); border-radius:10px; padding:32px; height:fit-content;}
+  .contact-card h3{color:var(--paper); font-size:1.15rem;}
+  .contact-row{display:flex; gap:12px; margin:18px 0; font-size:.92rem; align-items:flex-start;}
+  .contact-row .ic{flex-shrink:0; margin-top:2px;}
+  .contact-row a{color:var(--gold);}
+  .form-note{font-size:.82rem; color:var(--ink-soft); margin-top:10px;}
+  #formStatus{margin-top:14px; font-size:.9rem; font-weight:700; color:var(--olive-dark); display:none;}
+
+  /* ---------- Donate ---------- */
+  .donate-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:36px;}
+  @media(max-width:860px){.donate-grid{grid-template-columns:1fr;}}
+  .donate-card{background:var(--card); border-radius:10px; padding:30px 26px; text-align:left; border:1px solid var(--rose-dust);}
+  .donate-card .ic{width:44px; height:44px; border-radius:50%; background:var(--clay); display:flex; align-items:center; justify-content:center; margin-bottom:16px; color:#fff;}
+  .donate-card h3{font-size:1.1rem;}
+  .donate-card p{font-size:.9rem; color:var(--ink-soft); margin-bottom:18px;}
+  .donate-hero-band{background:var(--clay); color:#fff; border-radius:12px; padding:44px 40px; text-align:center; margin-bottom:10px;}
+  .donate-hero-band h1{color:#fff;}
+  .donate-hero-band p{color:rgba(255,255,255,.9); max-width:56ch; margin:0 auto;}
+
+  .reveal-panel{
+    display:none; margin-top:16px; padding-top:16px; border-top:1px dashed var(--rose-dust);
+  }
+  .reveal-panel.open{display:block;}
+  .reveal-row{
+    display:flex; align-items:center; gap:8px; background:var(--paper); border-radius:6px; padding:9px 12px; margin-bottom:8px;
+  }
+  .reveal-label{font-size:.72rem; font-weight:800; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft); flex-shrink:0; width:82px;}
+  .reveal-value{font-family:'Archivo',monospace; font-size:.82rem; word-break:break-all; flex:1; color:var(--ink);}
+  .copy-btn{background:none; border:none; font-size:.95rem; padding:2px 4px; flex-shrink:0;}
+  .copy-btn:hover{opacity:.7;}
+  .reveal-note{font-size:.78rem; color:var(--clay-dark); margin:10px 0 0 0;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--ink); color:var(--paper); padding:56px 0 26px 0; margin-top:20px;}
+  .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px;}
+  @media(max-width:760px){.footer-grid{grid-template-columns:1fr; gap:30px;}}
+  footer h4{color:var(--gold); font-size:.85rem; text-transform:uppercase; letter-spacing:.08em; margin-bottom:14px; font-family:'Archivo',sans-serif; font-weight:800;}
+  footer p, footer a{color:rgba(243,232,216,0.82); font-size:.9rem;}
+  footer a:hover{color:var(--gold);}
+  footer ul{list-style:none; padding:0; margin:0;}
+  footer li{margin-bottom:9px;}
+  .footer-bottom{
+    border-top:1px solid rgba(243,232,216,0.15); margin-top:40px; padding-top:20px; display:flex; justify-content:space-between;
+    flex-wrap:wrap; gap:10px; font-size:.8rem; color:rgba(243,232,216,0.6);
+  }
+</style>
+</head>
+<body>
+<header class="site">
+<div class="header-inner">
+<div class="logo">
+<img alt="Avec Human Supporters" height="38" src="pics/Avec-HSA.webp" style="border-radius:6px;" width="38"/>
+<span>AVEC<span class="sub">Human Supporters</span></span>
+</div>
+<nav class="main" id="mainNav">
+<a class="active" data-page="home" href="#home"><span>Accueil</span></a>
+<a data-page="about" href="#about"><span>À propos</span></a>
+<a data-page="projects" href="#projects"><span>Projets</span></a>
+<a data-page="contact" href="#contact"><span>Contact</span></a>
+</nav>
+<div class="header-actions">
+<a class="btn-donate-top" data-page="donate" href="#donate"><span>Faire un don</span></a>
+<button aria-label="Menu" class="burger" id="burgerBtn"><span></span><span></span><span></span></button>
+</div>
+</div>
+</header>
+<!-- ================= HOME ================= -->
+<main>
+<section class="page active" id="page-home">
+<div class="hero">
+<div class="wrap hero-grid">
+<div>
+<div class="eyebrow"><span>Association loi 1901 · Nantes, France</span></div>
+<h1>Des mains solidaires,<br/><em>un monde meilleur.</em></h1>
+
+<p class="lead">Nous connectons des bénévoles à des projets qui comptent, entre la France, l'Europe et la Méditerranée — par l'éducation, l'art et la justice sociale.</p>
+
+<div class="hero-ctas">
+<a class="btn btn-primary" data-page="projects" href="#projects"><span>Découvrir nos projets</span></a>
+<a class="btn btn-outline" data-page="about" href="#about"><span>Notre histoire</span></a>
+</div>
+<div class="meta-note">
+<span class="dot"></span>
+<span>Nous n'utilisons pas les plateformes Meta. <a data-page="about" href="#about" onclick="setTimeout(()=&gt;document.getElementById('digital').scrollIntoView(),50)">En savoir plus →</a></span>
+
+</div>
+</div>
+<div class="photo-stack">
+<img alt="Atelier droits humains" class="p1" src="pics/human 1.webp"/>
+<img alt="Éducation populaire" class="p2" src="pics/non-formal 4.webp"/>
+<img alt="Échange international" class="p3" src="pics/International 2.webp"/>
+</div>
+</div>
+</div>
+<section>
+<div class="wrap">
+<div class="eyebrow"><span>Nos trois piliers</span></div>
+<h2 style="max-width:20ch;"><span>Trois façons de tisser du lien</span></h2>
+<div class="pillars">
+<div class="pillar-card">
+<img alt="Éducation populaire" src="pics/non-formal 4.webp"/>
+<div class="pillar-body">
+<h3>Éducation populaire &amp; non formelle</h3>
+
+<p>Apprendre autrement, hors des cadres classiques : participation active, émancipation, ateliers et débats ouverts à toutes et tous.</p>
+
+<a class="more" data-page="projects" href="#projects"><span>Voir les projets →</span></a>
+</div>
+</div>
+<div class="pillar-card">
+<img alt="Droits de l'homme" src="pics/human right 2.webp"/>
+<div class="pillar-body">
+<h3>Droits de l'homme &amp; justice sociale</h3>
+
+<p>Soutien éducatif aux enfants, alphabétisation des femmes, et actions garantissant un accès égal à l'éducation et aux opportunités.</p>
+
+<a class="more" data-page="projects" href="#projects"><span>Voir les projets →</span></a>
+</div>
+</div>
+<div class="pillar-card">
+<img alt="Méditerranéen transculturel" src="pics/med - trans.webp"/>
+<div class="pillar-body">
+<h3>Méditerranéen &amp; transculturel</h3>
+
+<p>Dialogue interculturel, coopération transfrontalière et solidarité entre la France, l'Europe et les partenaires méditerranéens.</p>
+
+<a class="more" data-page="projects" href="#projects"><span>Voir les projets →</span></a>
+</div>
+</div>
+</div>
+<div class="stat-strip">
+<div class="stat"><div class="num">2013</div><div class="label">Année de fondation</div></div>
+<div class="stat"><div class="num">3</div><div class="label">Domaines d'action</div></div>
+<div class="stat"><div class="num">6</div><div class="label">Pays partenaires</div></div>
+<div class="stat"><div class="num">13</div><div class="label">Ans de terrain</div></div>
+</div>
+</div>
+</section>
+</section>
+<!-- ================= ABOUT ================= -->
+<section class="page" id="page-about">
+<div class="wrap page-hero">
+<div class="breadcrumb"><a data-page="home" href="#home"><span>Accueil</span></a><span class="sep">/</span><span>À propos</span></div>
+<div class="eyebrow"><span>Qui sommes-nous</span></div>
+<h1>À propos d'Avec Human Supporters</h1>
+
+</div>
+<section id="aboutSection">
+<div class="wrap mission-block">
+<div>
+<h2>Notre mission</h2>
+
+<p>Avec Human Supporters est une association à but non lucratif, humanitaire et solidaire, engagée dans la défense des droits humains, la promotion du droit international et la lutte contre toute forme de discrimination. Nous croyons en l'égalité entre les peuples, et nous travaillons à construire une société plus inclusive, tolérante et juste.</p>
+
+<p>Nous concevons des projets qui autonomisent les individus et les communautés grâce à des initiatives psycho-éducatives, artistiques, culturelles et environnementales, sans restriction géographique.</p>
+
+</div>
+<div>
+<h2>Notre engagement</h2>
+
+<p>Une partie essentielle de notre mission consiste à donner de la visibilité aux voix souvent marginalisées, en partageant des actualités, des histoires et des expressions culturelles venues du monde entier.</p>
+
+<p>Par l'action collective, les partenariats et l'engagement civique, nous soutenons la dignité humaine et une solidarité concrète, au-delà des frontières.</p>
+
+</div>
+</div>
+</section>
+<section class="deep" id="ourStory">
+<div class="wrap">
+<div class="eyebrow"><span>Depuis 2013</span></div>
+<h2><span>Notre histoire, fil après fil</span></h2>
+<div class="timeline">
+<svg class="timeline-thread" height="100%" style="position:absolute;" width="2">
+</svg>
+<div style="position:absolute; left:19px; top:6px; bottom:6px; width:2px; background-image:linear-gradient(var(--clay) 60%, transparent 0); background-size:2px 12px; background-repeat:repeat-y;"></div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<span class="year">2013</span>
+<h4>Fondation de l'association</h4>
+
+<p>AVEC Human Supporters naît avec l'ambition de soutenir l'éducation, la culture et les valeurs humaines par la coopération internationale.</p>
+
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<span class="year">Premiers pas</span>
+<h4>Subvention ARASICOD</h4>
+
+<p>Financée par le Conseil régional des Pays de la Loire, elle soutient un projet éducatif de trois ans en Palestine, avec l'Association Human Supporters.</p>
+
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<span class="year">À Nantes</span>
+<h4>Festival pour la Palestine</h4>
+
+<p>Un festival sensibilise le public nantais à la situation en Palestine, à travers l'art, le dialogue et la participation communautaire.</p>
+
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<span class="year">Jeunesse</span>
+<h4>Échanges France–Palestine</h4>
+
+<p>Plusieurs projets d'échange créent des espaces pour que les jeunes se rencontrent et comprennent mieux leurs cultures respectives.</p>
+
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<span class="year">Par l'art</span>
+<h4>Projet Amal &amp; Festiclown</h4>
+
+<p>Des clowns venus de plusieurs pays animent des ateliers artistiques en Palestine, utilisant l'art et le jeu comme outils d'expression et de soutien émotionnel.</p>
+
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<span class="year">2023</span>
+<h4>Recentrage sur la France</h4>
+
+<p>L'association renforce son impact local et se concentre davantage sur l'éducation populaire, en explorant le lien entre art et guérison par le mouvement.</p>
+
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<span class="year">À Rezé</span>
+<h4>Partenariat CEMEA &amp; Ville de Rezé</h4>
+
+<p>Un projet mené avec CEMEA et la municipalité de Rezé, avec l'accueil de Neaji Islam, relie pratique artistique, éducation non formelle et travail communautaire.</p>
+
+</div>
+<div class="timeline-item">
+<div class="timeline-dot" style="background:var(--gold); border-color:var(--gold);"></div>
+<span class="year">Aujourd'hui</span>
+<h4>Un travail vivant, local et international</h4>
+
+<p>Nous bâtissons des partenariats de confiance qui partagent nos valeurs de justice sociale, et soutenons les idées et projets émergents.</p>
+
+</div>
+</div>
+</div>
+</section>
+<section id="digital">
+<div class="wrap">
+<div class="responsibility">
+<div class="eyebrow"><span>Sobriété numérique</span></div>
+<h2>Pourquoi nous n'utilisons pas les plateformes Meta</h2>
+
+<p style="max-width:70ch; color:rgba(243,232,216,0.9);">Nos informations officielles vivent uniquement sur ce site. Republier le même contenu sur de multiples plateformes multiplie le stockage, le transfert de données et la consommation d'énergie et d'eau des centres de données — un coût environnemental invisible mais bien réel. Nous avons choisi de publier une seule fois, avec intention, plutôt que d'être partout.</p>
+
+<div class="resp-grid">
+<div>
+<h4>Moins de duplication</h4>
+
+<p>Chaque republication demande du stockage, du transfert de données et des serveurs actifs 24h/24.</p>
+
+</div>
+<div>
+<h4>Un vrai coût en eau</h4>
+
+<p>Le refroidissement des centres de données consomme d'importantes quantités d'eau, souvent négligées.</p>
+
+</div>
+<div>
+<h4>Publier moins, avec sens</h4>
+
+<p>Nous préférons la profondeur et la cohérence à la visibilité constante sur des plateformes extractives.</p>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="deep" id="ourpartners">
+<div class="wrap">
+<div class="eyebrow"><span>Ensemble</span></div>
+<h2><span>Nos partenaires</span></h2>
+<div class="partners-group">
+<h3>Partenaires européens</h3>
+
+<div class="partner-list">
+<a class="partner-chip" href="https://www.oktoberkoret.dk/" rel="noopener" target="_blank">Oktoberkoret <span class="flag">— Danemark</span></a>
+<a class="partner-chip" href="https://coruna2018.redeacampa.org/es/" rel="noopener" target="_blank">Pallasos en Rebeldía <span class="flag">— Espagne</span></a>
+<a class="partner-chip" href="https://www.assopacepalestina.org/" rel="noopener" target="_blank">Assopace Palestina <span class="flag">— Italie</span></a>
+</div>
+</div>
+<div class="partners-group">
+<h3>Partenaires internationaux</h3>
+
+<div class="partner-list">
+<a class="partner-chip" href="https://humansupporters.org/" rel="noopener" target="_blank">Human Supporters Association <span class="flag">— Palestine</span></a>
+<a class="partner-chip" href="https://www.nablus.org/index.php/ar/" rel="noopener" target="_blank">Nablus <span class="flag">— Palestine</span></a>
+<a class="partner-chip" href="https://www.linkedin.com/company/rise-for-good/" rel="noopener" target="_blank">RISE for Good <span class="flag">— Jordanie</span></a>
+</div>
+</div>
+<div class="partners-group">
+<h3>Partenaires locaux (France)</h3>
+
+<div class="partner-list">
+<a class="partner-chip" href="https://cemea-pdll.org/" rel="noopener" target="_blank">CEMEA PDLL</a>
+<a class="partner-chip" href="https://www.france-palestine.org/" rel="noopener" target="_blank">Al-Tadamun / AFPS</a>
+<a class="partner-chip" href="https://www.reze.fr/" rel="noopener" target="_blank">Ville de Rezé</a>
+<a class="partner-chip" href="https://metropole.nantes.fr/" rel="noopener" target="_blank">Nantes Métropole</a>
+</div>
+</div>
+</div>
+</section>
+</section>
+<!-- ================= PROJECTS ================= -->
+<section class="page" id="page-projects">
+<div class="wrap page-hero">
+<div class="breadcrumb"><a data-page="home" href="#home"><span>Accueil</span></a><span class="sep">/</span><span>Projets</span></div>
+<div class="eyebrow"><span>Sur le terrain</span></div>
+<h1>Nos projets</h1>
+
+<p>Trois domaines d'action, tissés ensemble : droits humains, éducation populaire, et coopération méditerranéenne.</p>
+
+</div>
+<div class="domain">
+<div class="wrap">
+<div class="domain-photos">
+<img alt="" src="pics/human 1.webp"/>
+<img alt="" src="pics/human 7.webp"/>
+<img alt="" src="pics/human 8.webp"/>
+</div>
+<h2>Droits de l'homme &amp; justice sociale</h2>
+
+<p class="domain-intro">Des actions qui promeuvent l'égalité, l'inclusion et la dignité, tout en sensibilisant le public aux enjeux de justice sociale.</p>
+
+<div class="domain-list">
+<div class="domain-item">
+<h4>Sensibilisation &amp; éducation en France</h4>
+
+<p>Conférences publiques, expositions et rassemblements sur les droits humains, l'égalité des genres et la lutte contre les discriminations.</p>
+
+</div>
+<div class="domain-item">
+<h4>Soutien éducatif — enfants &amp; femmes</h4>
+
+<p>Accompagnement des enfants de 7 à 9 ans, des décrocheurs scolaires, et programmes d'alphabétisation pour les femmes.</p>
+
+</div>
+<div class="domain-item">
+<h4>Club des femmes</h4>
+
+<p>Activités de soin de soi, parentalité positive, bien-être familial et autonomisation des femmes.</p>
+
+</div>
+<div class="domain-item">
+<h4>Global Goals World Cup</h4>
+
+<p>Sensibilisation aux Objectifs de Développement Durable pour les femmes et les filles, par l'éducation et le sport.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="domain deep">
+<div class="wrap">
+<div class="domain-photos">
+<img alt="" src="pics/non-formal 7.webp"/>
+<img alt="" src="pics/new.webp"/>
+<img alt="" src="pics/non-formal 1.webp"/>
+</div>
+<h2>Éducation populaire &amp; non formelle</h2>
+
+<p class="domain-intro">Nous relions les principes de l'éducation populaire à la danse hip-hop : expression de soi, confiance et accessibilité, hors des cadres classiques. Depuis 2022, ce projet grandit pour garantir un accès égalitaire à la danse pour toutes et tous.</p>
+
+<div class="domain-list">
+<div class="domain-item">
+<h4>Programmes d'éducation non formelle</h4>
+
+<p>Discussions, ateliers créatifs et espaces d'apprentissage communautaires en France.</p>
+
+</div>
+<div class="domain-item">
+<h4>Projet « Hands in Clay »</h4>
+
+<p>Apprentissage artistique par le modelage et la céramique, pour la créativité et l'expression de soi.</p>
+
+</div>
+<div class="domain-item">
+<h4>Camps d'été &amp; d'hiver</h4>
+
+<p>Programmes éducatifs et récréatifs offrant des environnements sûrs pour les enfants.</p>
+
+</div>
+<div class="domain-item">
+<h4>Ateliers jeunesse — compétences pro</h4>
+
+<p>Renforcement des capacités : bien-être mental, résilience, employabilité et inclusion sociale.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="domain">
+<div class="wrap">
+<div class="domain-photos">
+<img alt="" src="pics/International 2.webp"/>
+<img alt="" src="pics/International 6.webp"/>
+<img alt="" src="pics/International 7.webp"/>
+</div>
+<h2>Projets transculturels &amp; internationaux</h2>
+
+<p class="domain-intro">Dialogue interculturel, coopération transfrontalière et solidarité entre la France, l'Europe et les partenaires méditerranéens.</p>
+
+<div class="domain-list">
+<div class="domain-item">
+<h4>Partenariats &amp; échanges internationaux</h4>
+
+<p>Séminaires, formations et projets collaboratifs entre organisations françaises, bénévoles et partenaires méditerranéens.</p>
+
+</div>
+<div class="domain-item">
+<h4>Corps européen de solidarité</h4>
+
+<p>Accueil de volontaires français à Naplouse dans des programmes d'apprentissage interculturel.</p>
+
+</div>
+<div class="domain-item">
+<h4>Solidarité &amp; collecte de fonds</h4>
+
+<p>Mobilisation de la société civile française pour soutenir des programmes éducatifs et psychosociaux.</p>
+
+</div>
+<div class="domain-item">
+<h4>Sensibilisation — Naplouse</h4>
+
+<p>Échange culturel et partage d'histoires pour connecter le public français aux communautés palestiniennes.</p>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= CONTACT ================= -->
+<section class="page" id="page-contact">
+<div class="wrap page-hero">
+<div class="breadcrumb"><a data-page="home" href="#home"><span>Accueil</span></a><span class="sep">/</span><span>Contact</span></div>
+<div class="eyebrow"><span>Organisation non gouvernementale</span></div>
+<h1>Parlons-en</h1>
+
+<p>Une question, une idée de projet, une envie de bénévolat ? Écrivez-nous.</p>
+
+</div>
+<div class="wrap">
+<div class="contact-grid">
+<form id="contactForm">
+<div class="field">
+<label for="cf-name">Nom complet</label>
+
+<input id="cf-name" placeholder="Jeanne Dupont" required="" type="text"/>
+</div>
+<div class="field">
+<label for="cf-email">E-mail</label>
+
+<input id="cf-email" placeholder="vous@exemple.com" required="" type="email"/>
+</div>
+<div class="field">
+<label for="cf-subject">Sujet</label>
+
+<input id="cf-subject" placeholder="Bénévolat, partenariat, don..." required="" type="text"/>
+</div>
+<div class="field">
+<label for="cf-message">Message</label>
+
+<textarea id="cf-message" placeholder="Votre message..." required="" rows="5"></textarea>
+</div>
+<button class="btn btn-primary" type="submit"><span>Envoyer le message</span></button>
+<p class="form-note">En envoyant, votre application e-mail s'ouvrira avec le message pré-rempli à destination de avechsa@gmail.com.</p>
+
+<p id="formStatus"><span>Ouverture de votre messagerie…</span></p>
+</form>
+<div class="contact-card">
+<h3>Informations de contact</h3>
+
+<div class="contact-row">
+<span class="ic">📍</span>
+<span>
+<span>Siège social :</span><br/>
+<a href="https://www.google.com/maps/place/102+Rue+Saint-Jacques,+44200+Nantes,+France" rel="noopener" target="_blank">102 Rue Saint-Jacques, 44200 Nantes — France</a>
+</span>
+</div>
+<div class="contact-row">
+<span class="ic">📧</span>
+<span><a href="mailto:avechsa@gmail.com">avechsa@gmail.com</a></span>
+</div>
+<div class="contact-row">
+<span class="ic">📞</span>
+<span><a href="tel:+330749749261">+33 07 49 74 92 61</a></span>
+</div>
+<div class="contact-row">
+<span class="ic">💬</span>
+<span><a href="https://wa.me/qr/4OYOXBNNRZX2J1" rel="noopener" target="_blank">WhatsApp</a></span>
+</div>
+<div class="contact-row">
+<span class="ic">🏢</span>
+<span>SIRET : 791 991 268 00024</span>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= DONATE ================= -->
+<section class="page" id="page-donate">
+<div class="wrap page-hero">
+<div class="donate-hero-band">
+<div class="eyebrow" style="color:#F3E8D8;"><span>Faites la différence</span></div>
+<h1>Soutenez nos actions</h1>
+
+<p>Votre don nous aide à continuer et développer nos projets d'éducation, de justice sociale et de solidarité internationale.</p>
+
+</div>
+<div class="donate-grid">
+<div class="donate-card">
+<div class="ic">💳</div>
+<h3>PayPal</h3>
+<p>La façon la plus rapide de faire un don ponctuel, en toute sécurité.</p>
+
+<a class="btn btn-primary" href="https://www.paypal.me/NeajiIslam" rel="noopener" target="_blank"><span>Donner via PayPal</span></a>
+</div>
+<div class="donate-card">
+<div class="ic">🏦</div>
+<h3>Virement bancaire</h3>
+
+<p>Pour un don ponctuel ou récurrent, utilisez directement nos coordonnées bancaires ci-dessous.</p>
+
+<button class="btn btn-outline" onclick="toggleReveal('bankDetails', this)" type="button">
+<span>Afficher le RIB</span>
+</button>
+<div class="reveal-panel" id="bankDetails">
+<div class="reveal-row"><span class="reveal-label"><span>Banque</span></span><span class="reveal-value">Centre Financier de Nantes — La Banque Postale</span></div>
+<div class="reveal-row"><span class="reveal-label"><span>Titulaire</span></span><span class="reveal-value">AVEC HUMAN SUPPORTERS NABLUS</span></div>
+<div class="reveal-row"><span class="reveal-label">N° compte</span><span class="reveal-value" id="accountValue">1265847E032</span><button class="copy-btn" onclick="copyValue('accountValue', this)" type="button">📋</button></div>
+<div class="reveal-row"><span class="reveal-label">IBAN</span><span class="reveal-value" id="ibanValue">FR97 2004 1010 1112 6584 7E03 271</span><button class="copy-btn" onclick="copyValue('ibanValue', this)" type="button">📋</button></div>
+<div class="reveal-row"><span class="reveal-label">BIC / SWIFT</span><span class="reveal-value" id="bicValue">PSSTFRPPNTE</span><button class="copy-btn" onclick="copyValue('bicValue', this)" type="button">📋</button></div>
+
+</div>
+</div>
+<div class="donate-card">
+<div class="ic">◎</div>
+<h3>Crypto-monnaie</h3>
+
+<p>Nous acceptons les dons en Bitcoin. Adresse de portefeuille ci-dessous.</p>
+
+<button class="btn btn-outline" onclick="toggleReveal('cryptoDetails', this)" type="button">
+<span>Afficher l'adresse</span>
+</button>
+<div class="reveal-panel" id="cryptoDetails">
+<div class="reveal-row"><span class="reveal-label">BTC</span><span class="reveal-value" id="btcValue">bc1p83fmutuptp2yg3zs5r70rqatsva9lgqwl7mrvcv9mwa6fwe6wyrshty5mh</span><button class="copy-btn" onclick="copyValue('btcValue', this)" type="button">📋</button></div>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="wrap footer-grid">
+<div>
+<div class="logo" style="color:var(--paper); margin-bottom:14px;">
+<img alt="Avec Human Supporters" height="34" src="pics/Avec-HSA.webp" style="border-radius:6px;" width="34"/>
+<span>AVEC<span class="sub" style="color:rgba(243,232,216,0.6);">Human Supporters</span></span>
+</div>
+<p>Avec Human Supporters PDLL<br/>Siège social : CEMEA PDLL, 102 Rue Saint-Jacques, 44200 Nantes<br/>SIRET : 791 991 268 00024</p>
+
+</div>
+<div>
+<h4>Navigation</h4>
+
+<ul>
+<li><a data-page="home" href="#home"><span>Accueil</span></a></li>
+<li><a data-page="about" href="#about"><span>À propos</span></a></li>
+<li><a data-page="projects" href="#projects"><span>Projets</span></a></li>
+<li><a data-page="contact" href="#contact"><span>Contact</span></a></li>
+<li><a data-page="donate" href="#donate"><span>Faire un don</span></a></li>
+</ul>
+</div>
+<div>
+<h4>Contact</h4>
+
+<ul>
+<li><a href="mailto:avechsa@gmail.com">avechsa@gmail.com</a></li>
+<li><a href="tel:+330749749261">+33 07 49 74 92 61</a></li>
+<li><span>Nantes, France</span></li>
+</ul>
+</div>
+</div>
+<div class="wrap footer-bottom">
+<span>© 2026 Avec Human Supporters</span>
+<span>Site conçu avec soin — sans plateformes Meta.</span>
+
+</div>
+</footer>
+<script>
+  // ---- Page routing ----
+  const pages = document.querySelectorAll('.page');
+  const navLinks = document.querySelectorAll('a[data-page]');
+
+  function showPage(id){
+    pages.forEach(p => p.classList.toggle('active', p.id === 'page-' + id));
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('data-page') === id));
+    window.scrollTo({top:0, behavior:'instant' in window ? 'instant' : 'auto'});
+    document.getElementById('mainNav').classList.remove('open');
+  }
+
+  navLinks.forEach(a=>{
+    a.addEventListener('click', (e)=>{
+      const id = a.getAttribute('data-page');
+      // let hash update naturally, but also handle same-hash clicks
+      setTimeout(()=>showPage(id), 0);
+    });
+  });
+
+  window.addEventListener('hashchange', ()=>{
+    const id = (location.hash || '#home').replace('#','');
+    if(document.getElementById('page-'+id)) showPage(id);
+  });
+
+  // initial load
+  const initial = (location.hash || '#home').replace('#','');
+  showPage(document.getElementById('page-'+initial) ? initial : 'home');
+
+  // burger menu
+  document.getElementById('burgerBtn').addEventListener('click', ()=>{
+    document.getElementById('mainNav').classList.toggle('open');
+  });
+
+  // donation details reveal + copy
+  function toggleReveal(id, btn){
+    const panel = document.getElementById(id);
+    panel.classList.toggle('open');
+    const isOpen = panel.classList.contains('open');
+    const span = btn.querySelector('span');
+    if(isOpen){
+      span.textContent = 'Masquer';
+    } else {
+      span.textContent = (id === 'bankDetails') ? 'Afficher le RIB' : "Afficher l'adresse";
+    }
+  }
+  function copyValue(id, btn){
+    const text = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(text).then(()=>{
+      const old = btn.textContent;
+      btn.textContent = '✓';
+      setTimeout(()=>btn.textContent = old, 1200);
+    });
+  }
+
+  // contact form -> mailto
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('cf-name').value;
+    const email = document.getElementById('cf-email').value;
+    const subject = document.getElementById('cf-subject').value;
+    const message = document.getElementById('cf-message').value;
+    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+    const status = document.getElementById('formStatus');
+    status.style.display = 'block';
+    window.location.href = `mailto:avechsa@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+  });
+</script>
+</body>
+</html>
